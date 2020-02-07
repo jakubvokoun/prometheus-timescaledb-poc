@@ -7,7 +7,7 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'codelab-monitor'
+      monitor: 'poc'
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -30,3 +30,12 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
+
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'node'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['node-exporter:9100']

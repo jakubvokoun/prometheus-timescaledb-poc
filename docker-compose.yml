@@ -1,4 +1,15 @@
 services:
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:v0.18.1
+    ports: 
+       - 19100:9100/tcp
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --web.listen-address=0.0.0.0:9100
+    volumes:
+       - /proc:/host/proc:ro
+       - /sys:/host/sys:ro
   db:
     environment:
       POSTGRES_PASSWORD: postgres
